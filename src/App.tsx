@@ -1,16 +1,32 @@
+import { useState } from "react";
+import Alert, { AlertType } from "./components/Alert";
 import Button, { ButtonType } from "./components/Button";
 
 function App() {
-  const button_type: ButtonType = "danger";
+  const [showAlert, setShowAlert] = useState(false);
+  const type: ButtonType | AlertType = "primary";
   return (
     <>
+      {showAlert && (
+        <Alert
+          alert_type={type}
+          onClose={() => {
+            setShowAlert(false);
+            console.log(`${type} alert closed!`);
+          }}
+        >
+          <strong>Holy guacamole!</strong> You should check in on some of those
+          fields below.
+        </Alert>
+      )}
       <Button
-        button_type={button_type}
+        button_type={type}
         onClick={() => {
-          console.log(`${button_type} button has been clicked!`);
+          console.log(`${type} button clicked!`);
+          setShowAlert(true);
         }}
       >
-        {button_type}
+        {type}
       </Button>
     </>
   );
