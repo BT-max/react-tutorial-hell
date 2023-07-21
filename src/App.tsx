@@ -1,11 +1,7 @@
-import "./App.css";
+import ListGroup from "./components/ListGroup";
 
 function App() {
-  return (
-    <>
-      <div>Hello World!</div>
-    </>
-  );
+  return <ListGroup />;
 }
 
 export default App;
