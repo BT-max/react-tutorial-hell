@@ -1,12 +1,17 @@
-import Alert, { AlertType } from "./components/Alert";
+import Button, { ButtonType } from "./components/Button";
 
 function App() {
-  const alert_type: AlertType = "danger";
+  const button_type: ButtonType = "danger";
   return (
     <>
-      <Alert alert_type={alert_type}>
-        A simple {alert_type} alert—check it out!
-      </Alert>
+      <Button
+        button_type={button_type}
+        onClick={() => {
+          console.log(`${button_type} button has been clicked!`);
+        }}
+      >
+        {button_type}
+      </Button>
     </>
   );
 }
