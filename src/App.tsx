@@ -1,18 +1,12 @@
-import ListGroup from "./components/ListGroup";
+import Alert, { AlertType } from "./components/Alert";
 
 function App() {
-  const cities = ["London", "Paris", "New York", "Madrid", "Berlin"];
-  const heading = "Cities";
-
-  const handleSelectItem = (item: string, index: number) =>
-    console.log(`${item} selected at ${index}`);
+  const alert_type: AlertType = "danger";
   return (
     <>
-      <ListGroup
-        heading={heading}
-        items={cities}
-        onSelectItem={handleSelectItem}
-      />
+      <Alert alert_type={alert_type}>
+        A simple {alert_type} alert—check it out!
+      </Alert>
     </>
   );
 }
