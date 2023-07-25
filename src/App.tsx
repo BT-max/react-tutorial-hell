@@ -1,21 +1,37 @@
-import ExpandableText from "./components/ExpandableText";
+import { useEffect, useState } from "react";
+import Form, { FormData } from "./components/Form";
+import FormView, { FormViewData } from "./components/FormView";
+
+export interface Transaction {
+  description: string;
+  amount: number;
+  category: string;
+}
 
 function App() {
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+    const localData = localStorage.getItem("transactions");
+    return localData ? JSON.parse(localData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
+
   return (
     <>
-      <ExpandableText>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa earum
-        aut reprehenderit. Cum, corrupti unde praesentium quasi accusamus
-        necessitatibus iste quas id culpa consequatur minus a nisi similique
-        aspernatur velit ab, accusantium ipsa deleniti odit? Animi repudiandae
-        dolorum commodi architecto ipsum ut odio et esse, nemo doloribus iusto
-        unde magnam soluta ipsa suscipit, voluptates eum quos rem? Deleniti ad
-        ratione, modi quo omnis debitis quam numquam officia eum minima
-        reprehenderit suscipit recusandae at officiis. Nemo mollitia, ipsam
-        numquam nisi recusandae minima magnam omnis, illo, nostrum eos dolor
-        architecto aut perferendis excepturi quam? Nemo commodi iusto
-        repellendus dolores suscipit vero consectetur.
-      </ExpandableText>
+      <Form
+        onSubmit={(data: FormData) => {
+          console.log(data);
+          setTransactions([...transactions, data]);
+        }}
+      ></Form>
+      <FormView
+        transactions={transactions}
+        onSubmit={(data: FormViewData) => {
+          console.log(data);
+        }}
+      ></FormView>
     </>
   );
 }
